@@ -1,10 +1,14 @@
 package hcmus.phpthinh.afinal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.mbms.MbmsErrors;
 import android.util.Log;
@@ -34,5 +38,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, 0x1234);
+        checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 0x2134);
+        checkPermission(Manifest.permission.INTERNET, 0x2133);
+
+    }
+
+    private void checkPermission(String permission, int requestCode){
+        if (ContextCompat.checkSelfPermission(MainActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[] {permission}, requestCode);
+        }
+
+
     }
 }

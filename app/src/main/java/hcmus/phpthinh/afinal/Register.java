@@ -38,6 +38,8 @@ public class Register extends AppCompatActivity{
     }
 
     private void init() {
+        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         editName = (EditText)findViewById(R.id.editName);
 
@@ -76,8 +78,6 @@ public class Register extends AppCompatActivity{
     }
 
     private void storeAndCall() {
-        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
         String name = editName.getText().toString();
         int age = Integer.valueOf(editAge.getText().toString());
         double height = Double.valueOf(editHeight.getText().toString());
@@ -85,7 +85,7 @@ public class Register extends AppCompatActivity{
         boolean female = true;
         if (radioMale.isChecked())
             female = false;
-        editor.putString(getResources().getString(R.string.keyName), name);
+        savePathFromImage(R.string.keyName, name);
         editor.putInt(getResources().getString(R.string.keyAge), age);
         editor.putFloat(getResources().getString(R.string.keyHeight), (float) height);
         editor.putFloat(getResources().getString(R.string.keyWeight), (float) weight);
@@ -109,8 +109,12 @@ public class Register extends AppCompatActivity{
                 e.printStackTrace();
             }
 
-            editor.putString(getResources().getString(R.string.keyPath), getRealPathFromURI(selected));
+            savePathFromImage(R.string.keyPath, getRealPathFromURI(selected));
         }
+    }
+
+    private void savePathFromImage(int p, String realPathFromURI) {
+        editor.putString(getResources().getString(p), realPathFromURI);
     }
 
     private String getRealPathFromURI(Uri contentURI) {
