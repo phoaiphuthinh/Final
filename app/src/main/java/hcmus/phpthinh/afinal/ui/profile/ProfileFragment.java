@@ -58,6 +58,7 @@ public class ProfileFragment extends Fragment {
             Bitmap bitmap = BitmapFactory.decodeFile(path);
             imageView.setImageBitmap(bitmap);
         }
+
         return root;
     }
 }
