@@ -98,6 +98,20 @@
         </RelativeLayout>
 
         <View style="@style/proifleDetailsView" />
+        <TextView
+            style="@style/headerText"
+            android:text="Statistics for last week"
+            android:layout_marginBottom="20dp"/>
+        <lecho.lib.hellocharts.view.LineChartView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/chart"
+            android:layout_marginBottom="30dp"
+            />
+        <View style="@style/proifleDetailsView"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/profileDetailsTextMain"
+        android:text="Update status"
+        android:textSize="30dp"
+        android:id="@+id/header"
+        />
+
+    <TextView
+        android:layout_below="@id/header"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textHeight"
+        android:text="Height"
+        android:textSize="15dp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        />
+    <EditText
+        android:layout_below="@id/header"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/textHeight"
+        android:layout_marginLeft="20dp"
+        android:inputType="numberDecimal"
+        android:id="@+id/editUpdateHeight"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textWeigh"
+        android:text="Weight"
+        android:textSize="15dp"
+        android:layout_below="@id/textHeight"
+        android:layout_marginTop="30dp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/textWeigh"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/textHeight"
+        android:layout_marginTop="30dp"
+        android:inputType="numberDecimal"
+        android:id="@+id/editUpdateWeight"
+        />
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/icon_yes"
+        android:layout_below="@id/textWeigh"
+        android:layout_marginTop="30dp"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="60dp"
+        android:background="@android:color/transparent"
+        android:id="@+id/buttonYes"
+        />
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/icon_no"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:layout_below="@id/textWeigh"
+        android:layout_toRightOf="@id/buttonYes"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="70dp"
+        android:id="@+id/buttonNo"
+        />
+</RelativeLayout>

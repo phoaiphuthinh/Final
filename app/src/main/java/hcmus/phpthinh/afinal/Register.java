@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -43,17 +44,37 @@ public class Register extends AppCompatActivity{
 
         editName = (EditText)findViewById(R.id.editName);
 
+        String name = sharedPreferences.getString(getResources().getString(R.string.keyName), null);
+        if (name != null)
+            editName.setHint(name);
+
         editAge = (EditText)findViewById(R.id.editAge);
+        int age = sharedPreferences.getInt(getResources().getString(R.string.keyAge), -1);
+        if (age > -1)
+            editAge.setHint("" + age);
 
         editHeight = (EditText)findViewById(R.id.editHeight);
+        float height = sharedPreferences.getFloat(getResources().getString(R.string.keyHeight), 0);
+        if (height > 0)
+            editHeight.setHint("" + height);
 
         editWeight = (EditText)findViewById(R.id.editWeight);
+        float weight = sharedPreferences.getFloat(getResources().getString(R.string.keyWeight), 0);
+        if (weight > 0)
+            editWeight.setHint("" + weight);
+
 
         radioMale = (RadioButton)findViewById(R.id.radio_male);
 
         radioFemale = (RadioButton)findViewById(R.id.radio_female);
 
         imageButton = (ImageButton)findViewById(R.id.profile);
+        String path = sharedPreferences.getString(getResources().getString(R.string.keyPath), null);
+        if (path != null){
+            Bitmap bitmap = BitmapFactory.decodeFile(path);
+            imageButton.setImageBitmap(bitmap);
+        }
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

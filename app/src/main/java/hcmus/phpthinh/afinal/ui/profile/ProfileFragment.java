@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,14 @@ import androidx.fragment.app.Fragment;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hcmus.phpthinh.afinal.R;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.view.LineChartView;
 
 public class ProfileFragment extends Fragment {
 
@@ -59,6 +67,23 @@ public class ProfileFragment extends Fragment {
             imageView.setImageBitmap(bitmap);
         }
 
+        LineChartView lineChartView = root.findViewById(R.id.chart);
+        double[] yaxis = {1,3,2,4};
+        List axisValue = new ArrayList();
+        Line line = new Line(axisValue).setColor(Color.parseColor("#19ACBD"));
+        for (int i = 0; i < yaxis.length; i++)
+            axisValue.add(new PointValue(i, (float) yaxis[i]));
+        List lines = new ArrayList();
+        lines.add(line);
+        double[] axis = {2,4,1,3};
+        axisValue = new ArrayList();
+        line = new Line(axisValue).setColor(Color.parseColor("#e3de54"));
+        for (int i = 0; i < yaxis.length; i++)
+            axisValue.add(new PointValue(i, (float) axis[i]));
+        lines.add(line);
+        LineChartData lineChartData = new LineChartData();
+        lineChartData.setLines(lines);
+        lineChartView.setLineChartData(lineChartData);
         return root;
     }
 }
