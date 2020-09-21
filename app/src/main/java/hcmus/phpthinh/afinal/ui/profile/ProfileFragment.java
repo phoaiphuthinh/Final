@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import hcmus.phpthinh.afinal.R;
@@ -68,22 +79,95 @@ public class ProfileFragment extends Fragment {
         }
 
         LineChartView lineChartView = root.findViewById(R.id.chart);
-        double[] yaxis = {1,3,2,4};
         List axisValue = new ArrayList();
         Line line = new Line(axisValue).setColor(Color.parseColor("#19ACBD"));
-        for (int i = 0; i < yaxis.length; i++)
-            axisValue.add(new PointValue(i, (float) yaxis[i]));
+        for (int i = 0; i < 7; i++)
+            if (getAtDiff(i, 0) > 0)
+                axisValue.add(new PointValue(6 - i, getAtDiff(i, 0)));
         List lines = new ArrayList();
         lines.add(line);
-        double[] axis = {2,4,1,3};
         axisValue = new ArrayList();
         line = new Line(axisValue).setColor(Color.parseColor("#e3de54"));
-        for (int i = 0; i < yaxis.length; i++)
-            axisValue.add(new PointValue(i, (float) axis[i]));
+        for (int i = 0; i < 7; i++)
+            if (getAtDiff(i, 1) > 0)
+                axisValue.add(new PointValue(6 - i, getAtDiff(i, 1)));
         lines.add(line);
+        axisValue = new ArrayList();
+        line = new Line(axisValue).setColor(Color.parseColor("#f26849"));
+        for (int i = 0; i < 7; i++)
+            if (getAtDiff(i, 2) > 0)
+                axisValue.add(new PointValue(6 - i, getAtDiff(i, 2)));
+        lines.add(line);
+
         LineChartData lineChartData = new LineChartData();
         lineChartData.setLines(lines);
         lineChartView.setLineChartData(lineChartData);
         return root;
     }
+
+    private float getAtDiff(int diff, int w){
+        File file = new File(getContext().getFilesDir(), "json_data");
+        String respone = "";
+        try {
+            FileReader reader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            StringBuilder builder = new StringBuilder();
+            String line = bufferedReader.readLine();
+            while (line != null){
+                builder.append(line).append("\n");
+                line = bufferedReader.readLine();
+            }
+            bufferedReader.close();// This responce will have Json Format String
+            respone = builder.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            JSONObject object = new JSONObject(respone);
+            JSONArray array = object.getJSONArray("arr");
+            for (int i = 0; i < array.length(); i++){
+                JSONObject tmp = array.getJSONObject(i);
+                int date = tmp.getInt("date");
+                int month = tmp.getInt("month");
+                int year = tmp.getInt("year");
+                if (getDiff(date, month, year) == diff){
+                    if (w == 0)
+                        return (float) tmp.getDouble("weight");
+                    else if (w == 1)
+                        return (float) (tmp.getDouble("weight") * 10000.0 / (tmp.getDouble("height") * tmp.getDouble("height")));
+                    else
+                        return (float) tmp.getDouble("height");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int getDiff(int date, int month, int year){
+        Date time = Calendar.getInstance().getTime();
+        int d = time.getDate();
+        int m = time.getMonth();
+        int y = time.getYear();
+        if (y != year)
+            return 50;
+        if (m == month)
+            return d - date;
+        if (m - month > 1)
+            return 40;
+        int day = 0;
+        if (((1 << month) & 0x0ad5) > 0)
+            day = 31;
+        else if (((1 << month) & 0x0528) > 0)
+            day = 30;
+        else if (year % 4 == 0)
+            day = 29;
+        else
+            day = 28;
+        return day - date + d;
+    }
+
 }

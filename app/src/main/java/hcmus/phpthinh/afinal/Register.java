@@ -19,8 +19,19 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Register extends AppCompatActivity{
 
@@ -113,8 +124,70 @@ public class Register extends AppCompatActivity{
         editor.putBoolean(getResources().getString(R.string.keyGen), female);
         editor.putBoolean(getResources().getString(R.string.keyAcc), true);
         editor.commit();
+        saveJSON(height, weight);
         Intent intent = new Intent(Register.this, NavigationActivity.class);
         startActivity(intent);
+    }
+
+    private void saveJSON(double height, double weight) {
+        Date time = Calendar.getInstance().getTime();
+        int date = time.getDate();
+        int month = time.getMonth();
+        int year = time.getYear();
+        File file = new File(getBaseContext().getFilesDir(), "json_data");
+        String respone = null;
+        try {
+            FileReader reader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            StringBuilder builder = new StringBuilder();
+            String line = bufferedReader.readLine();
+            while (line != null){
+                builder.append(line).append("\n");
+                line = bufferedReader.readLine();
+            }
+            bufferedReader.close();// This responce will have Json Format String
+            respone = builder.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            JSONObject object;
+            if (respone == null)
+                object = new JSONObject();
+            else
+                object = new JSONObject(respone);
+            if (!object.has("arr"))
+                object.put("arr", new JSONArray());
+            JSONArray arr = object.getJSONArray("arr");
+            JSONObject add = new JSONObject();
+            add.put("date", date);
+            add.put("month", month);
+            add.put("year", year);
+            add.put("height", height);
+            add.put("weight", weight);
+            for (int i = 0; i < arr.length(); i++){
+                JSONObject tmp = arr.getJSONObject(i);
+                if (tmp.getInt("date") == date && tmp.getInt("month") == month && tmp.getInt("year") == year) {
+                    arr.remove(i);
+                    break;
+                }
+            }
+            arr.put(add);
+            object.put("arr", arr);
+            file = new File(getBaseContext().getFilesDir(),"json_data");
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(object.toString());
+            Log.d("@@@", object.toString());
+            bufferedWriter.close();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

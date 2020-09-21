@@ -31,6 +31,7 @@
         android:layout_marginLeft="20dp"
         android:inputType="numberDecimal"
         android:id="@+id/editUpdateHeight"
+        android:hint="Height in cm"
         />
 
     <TextView
@@ -53,6 +54,7 @@
         android:layout_marginTop="30dp"
         android:inputType="numberDecimal"
         android:id="@+id/editUpdateWeight"
+        android:hint="Weight in kg"
         />
     <ImageButton
         android:layout_width="40dp"
