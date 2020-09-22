@@ -5,6 +5,7 @@ import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,9 +73,12 @@ public class FoodFragment extends Fragment {
     private void showResults(){
         _textView.setText("Results");
         _arraylist.clear();
+        Log.d("@@@", "" + _arraylist.size());
         new loadIngredients(_textSearch.getText().toString()).execute();
-        _adapter.notifyDataSetChanged();
-        _list.invalidateViews();
+        Log.d("@@@", "" + _arraylist.size());
+        //Log.d("@@@", _arraylist.get(0).getLable());
+        //_adapter.notifyDataSetChanged();
+        //_list.invalidateViews();
     }
 
     private class loadIngredients extends AsyncTask<Void, Void, JSONObject>{
@@ -131,9 +135,9 @@ public class FoodFragment extends Fragment {
                 dialog.dismiss();
             if (jsonObject == null)
                 return;
-            _arraylist.clear();
             try {
-                JSONArray array = jsonObject.getJSONArray("parsed");
+                JSONArray array = jsonObject.getJSONArray("hints");
+                Log.d("@@@", "" + array.length());
                 for (int i = 0; i < array.length(); i++){
                     JSONObject object = array.getJSONObject(i).getJSONObject("food");
                     String name = object.getString("label");
@@ -150,12 +154,22 @@ public class FoodFragment extends Fragment {
                     newArr.add(Double.valueOf(nutrients.getDouble("PROCNT")));
                     newArr.add(Double.valueOf(nutrients.getDouble("FAT")));
                     newArr.add(Double.valueOf(nutrients.getDouble("CHOCDF")));
-                    _arraylist.add(new Ingredients(name, category, path, brand,newArr));
+                    addIngredients(new Ingredients(name, category, path, brand,newArr));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            showOnListView();
         }
+    }
+
+    private void showOnListView() {
+        Log.d("@@@", "" + _arraylist.size());
+        _adapter.notifyDataSetChanged();
+        _list.setAdapter(_adapter);
+    }
+
+    private void addIngredients(Ingredients ingredients) {
+        this._arraylist.add(ingredients);
     }
 }
