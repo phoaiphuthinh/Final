@@ -43,19 +43,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.chest_day:
-                ListExercise.set(2);
+                ListExercise.set(0);
                 break;
             case R.id.back_day:
-                ListExercise.set(3);
+                ListExercise.set(1);
                 break;
             case R.id.leg_day:
-                ListExercise.set(4);
+                ListExercise.set(2);
                 break;
             case R.id.arm_day:
-                ListExercise.set(5);
+                ListExercise.set(3);
                 break;
             case R.id.abs_day:
-                ListExercise.set(6);
+                ListExercise.set(4);
                 break;
             default:
                 break;

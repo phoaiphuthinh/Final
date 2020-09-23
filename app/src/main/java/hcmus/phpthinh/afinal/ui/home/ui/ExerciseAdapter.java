@@ -68,16 +68,38 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
             @Override
             public void onClick(View v) {
 
-                if (mYouTube.isEnabled()) {
-                    mYouTube.removeAllViews();
-                    mYouTube.removeAllViewsInLayout();
-                }
-
                 mYouTube.initialize(API, new YouTubePlayer.OnInitializedListener() {
                     @Override
-                    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                    public void onInitializationSuccess(YouTubePlayer.Provider provider, final YouTubePlayer youTubePlayer, boolean b) {
                         youTubePlayer.loadVideo(exercise.get_url());
                         youTubePlayer.play();
+
+                        youTubePlayer.setPlaybackEventListener(new YouTubePlayer.PlaybackEventListener() {
+                            @Override
+                            public void onPlaying() {
+
+                            }
+
+                            @Override
+                            public void onPaused() {
+                                youTubePlayer.release();
+                            }
+
+                            @Override
+                            public void onStopped() {
+
+                            }
+
+                            @Override
+                            public void onBuffering(boolean b) {
+
+                            }
+
+                            @Override
+                            public void onSeekTo(int i) {
+
+                            }
+                        });
                     }
 
                     @Override
