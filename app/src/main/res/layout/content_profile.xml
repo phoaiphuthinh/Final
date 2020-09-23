@@ -86,12 +86,13 @@
                 style="@style/profileDetailsImage" />
 
             <TextView
-                android:text="D.O.B"
+                android:text="Joined"
                 android:layout_toRightOf="@id/dobImageView"
                 style="@style/profileDetailsTextMain" />
 
             <TextView
                 android:text="12-05-1990"
+                android:id="@+id/joindate"
                 android:layout_toRightOf="@id/dobImageView"
                 style="@style/profileDetailsMiniText" />
 
