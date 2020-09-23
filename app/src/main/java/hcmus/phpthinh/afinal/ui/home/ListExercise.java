@@ -8,6 +8,9 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
 
@@ -20,6 +23,7 @@ public class ListExercise extends YouTubeBaseActivity {
     private ExerciseAdapter _exerciseAdapter;
     private ListView _lvExercise;
     public static int day;
+    String id = "1uwvxTT5V5M";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

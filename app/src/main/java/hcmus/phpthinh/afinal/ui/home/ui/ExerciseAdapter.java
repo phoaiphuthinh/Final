@@ -20,7 +20,7 @@ import java.util.List;
 import hcmus.phpthinh.afinal.R;
 
 public class ExerciseAdapter extends ArrayAdapter<Exercise> {
-    private String API = "AIzaSyDlwERSi1D9HSZzq_npptkzc9OjkiFt9iU";
+    private String API = "AIzaSyDy-oURstaoLho5PkBMlcug9Q7WqsNIzRA";
 
     private Context _context;
     private int _layoutID;
@@ -47,8 +47,9 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
             convertView = layoutInflater.inflate(_layoutID, null, false);
         }
 
-        YouTubePlayerView mYouTube = convertView.findViewById(R.id.youtube_player);
-        YouTubePlayer.OnInitializedListener mOnInit;
+        Log.e("Exercise", String.valueOf(position));
+
+        final YouTubePlayerView mYouTube = convertView.findViewById(R.id.youtube_player);
 
         TextView name = convertView.findViewById(R.id.nameExercise);
         TextView set = convertView.findViewById(R.id.set);
@@ -62,19 +63,34 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise> {
         rep.setText(String.valueOf(exercise.get_rep()));
         power.setText(exercise.get_power().toString() + "%");
 
-        mYouTube.initialize(API, new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                youTubePlayer.loadVideo("1uwvxTT5V5M");
-            }
 
+        mYouTube.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+            public void onClick(View v) {
+
+                if (mYouTube.isEnabled()) {
+                    mYouTube.removeAllViews();
+                    mYouTube.removeAllViewsInLayout();
+                }
+
+                mYouTube.initialize(API, new YouTubePlayer.OnInitializedListener() {
+                    @Override
+                    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                        youTubePlayer.loadVideo(exercise.get_url());
+                        youTubePlayer.play();
+                    }
+
+                    @Override
+                    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+                    }
+                });
 
             }
         });
 
         return convertView;
     }
+
 }
 
