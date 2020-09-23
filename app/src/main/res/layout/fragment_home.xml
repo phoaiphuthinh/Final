@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <TextView
+        android:id="@+id/chest_day"
+        android:clickable="true"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/chest_day"
+        android:alpha="0.4"
+        android:text="Chest Day"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textColor="@color/blackTextColor"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/back_day"
+        android:clickable="true"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/back_day"
+        android:alpha="0.4"
+        android:text="Back Day"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textColor="@color/blackTextColor"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/leg_day"
+        android:clickable="true"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/leg_day"
+        android:alpha="0.4"
+        android:text="Leg Day"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textColor="@color/blackTextColor"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:onClick="onClick"
+        android:id="@+id/arm_day"
+        android:clickable="true"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:background="@drawable/arm_day"
+        android:alpha="0.4"
+        android:text="Arm Day"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textColor="@color/blackTextColor"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/abs_day"
+        android:clickable="true"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="450dp"
+        android:background="@drawable/abs_day"
+        android:alpha="0.4"
+        android:text="Abs Day"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textColor="@color/blackTextColor"
+        android:textAllCaps="true" />
+
+
+</RelativeLayout>

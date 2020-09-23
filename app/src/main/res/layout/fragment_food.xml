@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="100dp"
+        android:background="@drawable/rounded_edittext"
+        android:layout_weight=".75"
+        android:layout_marginTop="30dp"
+        android:id="@+id/editFood"
+        android:padding="5dp"
+        android:hint="Search for ingredients"
+        />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="330dp"
+        android:layout_marginTop="20dp"
+        android:src="@android:drawable/ic_menu_search"
+        android:background="@android:color/transparent"
+        android:id="@+id/foodSearch"
+        android:scaleType="fitXY"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="monospace"
+        android:id="@+id/textHint"
+        android:paddingLeft="30dp"
+        android:layout_below="@id/editFood"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textHint"
+        android:layout_marginTop="10dp"
+        android:id="@+id/listFood"
+        />
+
+</RelativeLayout>
