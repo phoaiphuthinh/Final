@@ -71,6 +71,9 @@ public class ProfileFragment extends Fragment {
         String bmi = String.format("%.2f", weight / (height * height * 1.0 / 10000));
         textView.setText(bmi);
 
+        textView = (TextView)root.findViewById(R.id.joindate);
+        textView.setText("" + sharedPreferences.getInt("date", 01) + "-" + sharedPreferences.getInt("month", 01) + "-" + sharedPreferences.getInt("year", 2020));
+
         String path = sharedPreferences.getString(getResources().getString(R.string.keyPath), null);
         if (path != null) {
             ImageView imageView = (ImageView) root.findViewById(R.id.imageviewProfile);

@@ -122,6 +122,12 @@ public class Register extends AppCompatActivity{
         editor.putFloat(getResources().getString(R.string.keyHeight), (float) height);
         editor.putFloat(getResources().getString(R.string.keyWeight), (float) weight);
         editor.putBoolean(getResources().getString(R.string.keyGen), female);
+        if (sharedPreferences.getBoolean(getResources().getString(R.string.keyAcc), false)){
+            Date time = Calendar.getInstance().getTime();
+            editor.putInt("date", time.getDate());
+            editor.putInt("month", time.getMonth() + 1);
+            editor.putInt("year", time.getYear() + 1900);
+        }
         editor.putBoolean(getResources().getString(R.string.keyAcc), true);
         editor.commit();
         saveJSON(height, weight);
