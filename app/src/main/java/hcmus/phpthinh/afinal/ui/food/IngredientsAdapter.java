@@ -1,17 +1,14 @@
-package hcmus.phpthinh.afinal;
+package hcmus.phpthinh.afinal.ui.food;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,12 +16,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+
+import hcmus.phpthinh.afinal.R;
+import hcmus.phpthinh.afinal.ui.food.Ingredients;
 
 public class IngredientsAdapter extends ArrayAdapter<Ingredients> {
 

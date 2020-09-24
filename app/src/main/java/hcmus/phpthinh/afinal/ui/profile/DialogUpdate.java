@@ -1,8 +1,7 @@
-package hcmus.phpthinh.afinal;
+package hcmus.phpthinh.afinal.ui.profile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,12 +23,13 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+
+import hcmus.phpthinh.afinal.R;
 
 public class DialogUpdate extends DialogFragment {
 

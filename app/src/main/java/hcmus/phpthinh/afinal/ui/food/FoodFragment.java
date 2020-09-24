@@ -1,10 +1,8 @@
 package hcmus.phpthinh.afinal.ui.food;
 
 import android.app.ProgressDialog;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +30,6 @@ import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import hcmus.phpthinh.afinal.Ingredients;
-import hcmus.phpthinh.afinal.IngredientsAdapter;
 import hcmus.phpthinh.afinal.R;
 
 public class FoodFragment extends Fragment {

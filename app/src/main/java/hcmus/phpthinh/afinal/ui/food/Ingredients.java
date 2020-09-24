@@ -1,4 +1,4 @@
-package hcmus.phpthinh.afinal;
+package hcmus.phpthinh.afinal.ui.food;
 
 import java.util.ArrayList;
 
